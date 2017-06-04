@@ -14,7 +14,7 @@ class VoteDropdown extends Component {
     return (
       <span className="vote-dropdown">
         <StatusIcon
-          className="mr-1"
+          className="mr-2"
           loading={poll.loading}
           error={poll.error}
           lastUpdated={poll.lastUpdated}

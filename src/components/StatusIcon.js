@@ -6,9 +6,9 @@ import Error from './Error';
 
 const StatusIcon = ({ loading, error, lastUpdated, className }) => {
   if (loading) {
-    return <FontAwesome className="className" name="spinner" spin />;
+    return <FontAwesome className={className} name="spinner" spin />;
   } else if (error) {
-    return <Error className="className" message={error.message} />;
+    return <Error className={className} message={error.message} />;
   } else if (lastUpdated) {
     return (
       <FontAwesome
