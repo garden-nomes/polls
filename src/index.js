@@ -7,6 +7,7 @@ import registerServiceWorker from './registerServiceWorker';
 import { getPolls } from './actions';
 
 import 'bootstrap/dist/css/bootstrap.css';
+import 'font-awesome/css/font-awesome.css';
 
 const store = configureStore();
 
