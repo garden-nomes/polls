@@ -7,7 +7,7 @@ class PollsListItem extends Component {
     const { poll, vote } = this.props;
 
     return (
-      <ListGroupItem className="d-flex justify-content-between">
+      <ListGroupItem action className="d-flex justify-content-between">
         <span>
           <b>{poll.question}</b>
           {poll.options.map(option => (
