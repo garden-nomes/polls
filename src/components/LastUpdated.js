@@ -14,9 +14,9 @@ class LastUpdated extends Component {
     const { lastUpdated } = this.props;
 
     return (
-      <span className="small text-muted">
+      <small className="text-muted">
         Last updated {moment.unix(lastUpdated).fromNow()}
-      </span>
+      </small>
     );
   }
 }
