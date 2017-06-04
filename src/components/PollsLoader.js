@@ -33,19 +33,23 @@ export class PollsList extends Component {
   }
 
   render() {
-    const { loading, error, className } = this.props;
+    const { loading, error, lastUpdated, className } = this.props;
 
     return (
       <div className={classNames('polls-loader', className)}>
-        <LoaderButton loading={loading} error={error} onReload={this.reload} />
+        <LoaderButton
+          lastUpdated={lastUpdated}
+          loading={loading}
+          error={error}
+          onReload={this.reload} />
       </div>
     );
   }
 }
 
 const mapStateToProps = state => {
-  const { loading, error, items } = state.polls;
-  return { loading, error, items };
+  const { loading, error, lastUpdated, items } = state.polls;
+  return { loading, error, lastUpdated, items };
 };
 
 export default connect(mapStateToProps)(PollsList);

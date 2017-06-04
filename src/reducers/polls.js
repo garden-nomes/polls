@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 import {
   GET_POLLS,
   GET_POLLS_SUCCESS,
@@ -7,6 +9,7 @@ import {
 const initialState = {
   loading: false,
   error: null,
+  lastUpdated: null,
   items: []
 };
 
@@ -15,21 +18,22 @@ const polls = (state = initialState, action) => {
     case GET_POLLS:
       return {
         ...state,
-        loading: true,
-        error: null
+        loading: true
       };
     case GET_POLLS_SUCCESS:
       return {
         ...state,
         loading: false,
         error: null,
+        lastUpdated: moment().unix(),
         items: action.polls
       };
     case GET_POLLS_ERROR:
       return {
         ...state,
         loading: false,
-        error: action.error
+        error: action.error,
+        lastUpdated: moment().unix()
       };
     default:
       return state;

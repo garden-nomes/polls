@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 import { Button } from 'reactstrap';
 import FontAwesome from 'react-fontawesome';
 import classNames from 'classnames';
 import Error from './Error';
+import LastUpdated from './LastUpdated';
 
-const LoaderButton = ({ loading, error, onReload }) => {
+const LoaderButton = ({ loading, error, lastUpdated, onReload }) => {
   if (loading) {
     return (
       <span className="loader-button">
@@ -21,7 +23,11 @@ const LoaderButton = ({ loading, error, onReload }) => {
           <FontAwesome name="refresh" />
         </Button>
         &nbsp;
-        {!!error && <Error message={error.message} />}
+        {error ?
+          <Error message={error.message} />
+        :
+          <LastUpdated lastUpdated={lastUpdated} />
+        }
       </span>
     )
   }
