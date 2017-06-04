@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { ListGroup, ListGroupItem } from 'reactstrap';
 import classNames from 'classnames';
 import PollsLoader from './PollsLoader';
 
@@ -17,11 +18,11 @@ export class PollsList extends Component {
     return (
       <div className={classNames('polls-list', className)}>
         <PollsLoader />
-        <ul>
+        <ListGroup>
           {items.map((poll, i) => (
-            <li key={i}>{poll.question}</li>
+            <ListGroupItem key={i}>{poll.question}</ListGroupItem>
           ))}
-        </ul>
+        </ListGroup>
       </div>
     );
   }
