@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { ListGroup, ListGroupItem } from 'reactstrap';
+import { ListGroup } from 'reactstrap';
 import classNames from 'classnames';
 import PollsLoader from './PollsLoader';
+import PollsListItem from './PollsListItem';
 
 export class PollsList extends Component {
   static propTypes = {
@@ -17,10 +18,10 @@ export class PollsList extends Component {
 
     return (
       <div className={classNames('polls-list', className)}>
-        <PollsLoader />
+        <PollsLoader className="mb-2" />
         <ListGroup>
-          {items.map((poll, i) => (
-            <ListGroupItem key={i}>{poll.question}</ListGroupItem>
+          {items.map(poll => (
+            <PollsListItem key={poll._id} poll={poll} />
           ))}
         </ListGroup>
       </div>
