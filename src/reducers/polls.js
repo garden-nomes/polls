@@ -38,11 +38,29 @@ const polls = (state = initialState, action) => {
         error: action.error,
         lastUpdated: moment().unix()
       };
+    case VOTE_POLL:
+      return {
+        ...state,
+        items: state.items.map(poll => (
+          (poll._id === action.pollId) ? { ...poll, loading: true } : poll
+        ))
+      };
     case VOTE_POLL_SUCCESS:
       return {
         ...state,
         items: state.items.map(poll => (
-          (poll._id === action.poll._id) ? action.poll : poll
+          (poll._id === action.poll._id) ?
+            { ...action.poll, loading: false, lastUpdated: moment().unix() } :
+            poll
+        ))
+      };
+    case VOTE_POLL_ERROR:
+      return {
+        ...state,
+        items: state.items.map(poll => (
+          (poll._id === action.pollId) ?
+            { ...poll, loading: false, error: action.error } :
+            poll
         ))
       };
     default:

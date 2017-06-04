@@ -27,7 +27,7 @@ export const VOTE_POLL_SUCCESS = 'VOTE_POLL_SUCCESS';
 export const VOTE_POLL_ERROR = 'VOTE_POLL_ERROR';
 
 export const votePoll = (pollId, optionId) => dispatch => {
-  dispatch({ type: VOTE_POLL });
+  dispatch({ type: VOTE_POLL, pollId });
 
   axios.put(`/api/polls/${pollId}/vote/${optionId}`)
     .then(response => (
@@ -39,7 +39,8 @@ export const votePoll = (pollId, optionId) => dispatch => {
     .catch(error => (
       dispatch({
         type: VOTE_POLL_ERROR,
-        error: error
+        error: error,
+        pollId
       })
     ));
 };

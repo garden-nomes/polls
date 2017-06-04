@@ -17,7 +17,7 @@ class PollsListItem extends Component {
           ))}
         </span>
 
-        <VoteDropdown options={poll.options} onClick={vote} />
+        <VoteDropdown poll={poll} onClick={vote} />
       </ListGroupItem>
     );
   }
