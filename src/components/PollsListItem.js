@@ -1,16 +1,10 @@
 import React, { Component } from 'react';
-import {
-  Badge,
-  ListGroupItem,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem
-} from 'reactstrap';
+import { Badge, ListGroupItem } from 'reactstrap';
+import VoteDropdown from './VoteDropdown';
 
 class PollsListItem extends Component {
   render() {
-    const { poll } = this.props;
+    const { poll, vote } = this.props;
 
     return (
       <ListGroupItem className="d-flex justify-content-between">
@@ -23,17 +17,7 @@ class PollsListItem extends Component {
           ))}
         </span>
 
-        <UncontrolledDropdown>
-          <DropdownToggle caret>
-            Vote
-          </DropdownToggle>
-
-          <DropdownMenu right>
-            {poll.options.map(option => (
-              <DropdownItem key={option._id}>{option.name}</DropdownItem>
-            ))}
-          </DropdownMenu>
-        </UncontrolledDropdown>
+        <VoteDropdown options={poll.options} onClick={vote} />
       </ListGroupItem>
     );
   }

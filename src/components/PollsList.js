@@ -5,6 +5,7 @@ import { ListGroup } from 'reactstrap';
 import classNames from 'classnames';
 import PollsLoader from './PollsLoader';
 import PollsListItem from './PollsListItem';
+import { votePoll } from '../actions';
 
 export class PollsList extends Component {
   static propTypes = {
@@ -14,14 +15,18 @@ export class PollsList extends Component {
   };
 
   render() {
-    const { loading, error, items, className } = this.props;
+    const { loading, error, items, dispatch, className } = this.props;
 
     return (
       <div className={classNames('polls-list', className)}>
         <PollsLoader className="mb-2" />
         <ListGroup>
           {items.map(poll => (
-            <PollsListItem key={poll._id} poll={poll} />
+            <PollsListItem
+              key={poll._id}
+              poll={poll}
+              vote={(optionId) => dispatch(votePoll(poll._id, optionId))}
+            />
           ))}
         </ListGroup>
       </div>

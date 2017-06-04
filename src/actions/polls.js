@@ -21,3 +21,25 @@ export const getPolls = () => dispatch => {
       })
     ));
 };
+
+export const VOTE_POLL = 'VOTE_POLL';
+export const VOTE_POLL_SUCCESS = 'VOTE_POLL_SUCCESS';
+export const VOTE_POLL_ERROR = 'VOTE_POLL_ERROR';
+
+export const votePoll = (pollId, optionId) => dispatch => {
+  dispatch({ type: VOTE_POLL });
+
+  axios.put(`/api/polls/${pollId}/vote/${optionId}`)
+    .then(response => (
+      dispatch({
+        type: VOTE_POLL_SUCCESS,
+        poll: response.data
+      })
+    ))
+    .catch(error => (
+      dispatch({
+        type: VOTE_POLL_ERROR,
+        error: error
+      })
+    ));
+};
