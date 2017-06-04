@@ -14,6 +14,8 @@ const LoaderButton = ({ loading, error, lastUpdated, onReload }) => {
         <Button outline size="sm" color="secondary" disabled>
           <FontAwesome name="spinner" spin />
         </Button>
+        &nbsp;
+        <small class="text-muted">Loading...</small>
       </span>
     );
   } else {
