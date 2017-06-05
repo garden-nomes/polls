@@ -7,7 +7,6 @@ export const GET_POLLS_ERROR = 'GET_POLLS_ERROR';
 export const getPolls = () => dispatch => {
   dispatch({ type: GET_POLLS });
 
-  setTimeout(() => {
   axios.get('/api/polls')
     .then(response => (
       dispatch({
@@ -21,7 +20,6 @@ export const getPolls = () => dispatch => {
         error: error
       })
     ));
-  }, 1000);
 };
 
 export const VOTE_POLL = 'VOTE_POLL';
@@ -31,7 +29,6 @@ export const VOTE_POLL_ERROR = 'VOTE_POLL_ERROR';
 export const votePoll = (pollId, optionId) => dispatch => {
   dispatch({ type: VOTE_POLL, pollId });
 
-  setTimeout(() => {
   axios.put(`/api/polls/${pollId}/vote/${optionId}`)
     .then(response => (
       dispatch({
@@ -46,5 +43,4 @@ export const votePoll = (pollId, optionId) => dispatch => {
         pollId
       })
     ));
-  }, 1000);
 };
