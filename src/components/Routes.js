@@ -11,7 +11,6 @@ class Routes extends Component {
     return (
       <Router>
         <div>
-          <Header />
           <Route exact path="/" component={Home} />
         </div>
       </Router>

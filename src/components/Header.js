@@ -30,7 +30,7 @@ class Header extends Component {
       <div className={classNames('header', className)}>
         <Navbar light toggleable>
           <NavbarToggler right onClick={this.toggle} />
-          <NavbarBrand href="#">Pollstr</NavbarBrand>
+          <NavbarBrand href="#">Really Cool Polling App</NavbarBrand>
           <Collapse isOpen={isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem>

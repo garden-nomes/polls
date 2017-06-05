@@ -1,0 +1,11 @@
+.no-wrap {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.poll-list-item:hover > .no-wrap {
+  white-space: inherit;
+  overflow: inherit;
+  text-overflow: inherit;
+}

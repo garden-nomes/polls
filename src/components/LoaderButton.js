@@ -11,7 +11,7 @@ const LoaderButton = ({ loading, error, lastUpdated, onReload }) => {
   if (loading) {
     return (
       <span className="loader-button">
-        <Button outline size="sm" color="secondary" disabled>
+        <Button outline size="sm" color="info" disabled>
           <FontAwesome name="spinner" spin />
         </Button>
         &nbsp;
@@ -21,7 +21,7 @@ const LoaderButton = ({ loading, error, lastUpdated, onReload }) => {
   } else {
     return (
       <span className="loader-button">
-        <Button outline size="sm" color="secondary" onClick={onReload} >
+        <Button outline size="sm" color="info" onClick={onReload} >
           <FontAwesome name="refresh" />
         </Button>
         &nbsp;
