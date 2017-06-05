@@ -1,13 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import TwitterLoginButton from './TwitterLoginButton';
+import NewPollButton from './NewPollButton';
+import UserDropdown from './UserDropdown';
 
 class NavButtons extends Component {
   render() {
     const { me } = this.props;
 
-    if (me) {
-      return <div>{me.name}</div>;
+    console.log(me);
+    if (me && !me.loading && !me.error) {
+      return (
+        <div className="nav-buttons">
+          <NewPollButton className="mr-2" />
+          <UserDropdown me={me} />
+        </div>
+      );
     } else {
       return <TwitterLoginButton />;
     }
