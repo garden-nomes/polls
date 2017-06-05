@@ -19,7 +19,6 @@ export class PollsList extends Component {
 
     return (
       <div className={classNames('polls-list', className)}>
-        <PollsLoader className="mb-2" />
         <ListGroup>
           {items.map(poll => (
             <PollsListItem

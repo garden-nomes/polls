@@ -11,7 +11,7 @@ class VoteDropdown extends Component {
     const { poll, onClick } = this.props;
 
     return (
-      <UncontrolledDropdown tag="span">
+      <UncontrolledDropdown size="sm" tag="span">
         <DropdownToggle caret>Vote</DropdownToggle>
         <DropdownMenu right>
           {poll.options.map(option => (

@@ -4,8 +4,8 @@
   text-overflow: ellipsis;
 }
 
-.poll-list-item:hover > .no-wrap {
+/*.poll-list-item:hover > .no-wrap {
   white-space: inherit;
   overflow: inherit;
   text-overflow: inherit;
-}
+}*/
