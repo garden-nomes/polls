@@ -6,14 +6,13 @@ class AuthSuccess extends Component {
     const { location } = this.props;
     const { token } = queryString.parse(location.search)
 
-    localStorage.setItem("authToken", token);
-    window.opener.postMessage(token, "*");
+    window.opener.postMessage(token, '*');
     window.opener.focus();
     window.close();
   }
 
   render() {
-    return <h1>Success!</h1>;
+    return <div></div>;
   }
 }
 

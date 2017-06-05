@@ -12,6 +12,15 @@ class TwitterLoginButton extends Component {
     this.receiveMessage = this.receiveMessage.bind(this);
   }
 
+  componentDidMount() {
+    const { dispatch } = this.props;
+    const token = localStorage.getItem('token');
+
+    if (token) {
+      dispatch(getUser());
+    }
+  }
+
   popup() {
     window.open(
       'http://127.0.0.1:8000/auth/twitter', // url
