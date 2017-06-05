@@ -22,7 +22,7 @@ class PollsListItem extends Component {
       >
         <span className="no-wrap mr-2">
           <b>{poll.question}</b>
-          {poll.options.sort(poll => -poll.votes).map(option => (
+          {poll.options.sort(options => options.votes).reverse().map(option => (
             <span key={option._id} className="polls-list-item-option mx-1">
               {option.name} <Badge color="info" pill>{option.votes}</Badge>
             </span>
