@@ -1,6 +1,6 @@
 const express = require('express'),
       Poll = require('../models/poll'),
-      isAuthenticated = require('../lib/auth').isAuthenticated;
+      authenticate = require('../lib/authenticate');
 
 
 const polls = express.Router();
@@ -12,7 +12,7 @@ polls.get('/', (req, res, next) => {
   });
 });
 
-polls.post('/', isAuthenticated, (req, res, next) => {
+polls.post('/', authenticate, (req, res, next) => {
   let poll = new Poll();
 
   poll._user = req.user._id;
@@ -44,7 +44,7 @@ polls.put('/:id/vote/:optionId', (req, res, next) => {
   );
 });
 
-polls.delete('/:id', isAuthenticated, (req, res, next) => {
+polls.delete('/:id', authenticate, (req, res, next) => {
   Poll.remove({ _id: req.params.id, _user: req.user._id }, err => {
     if (err) return next(err);
     res.send({});
