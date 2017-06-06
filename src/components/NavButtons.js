@@ -6,13 +6,12 @@ import UserDropdown from './UserDropdown';
 
 class NavButtons extends Component {
   render() {
-    const { me } = this.props;
+    const { me, showCreate } = this.props;
 
-    console.log(me);
     if (me && !me.loading && !me.error) {
       return (
         <div className="nav-buttons">
-          <NewPollButton className="mr-2" />
+          <NewPollButton onClick={showCreate} className="mr-2" />
           <UserDropdown me={me} />
         </div>
       );
