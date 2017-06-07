@@ -28,7 +28,7 @@ class Home extends Component {
       <div className='Home'>
         <Row>
           <Col sm="6">
-            <PollsLoader className="mb-4" />
+            <PollsLoader className="mb-3" />
           </Col>
           <Col sm="6" className="text-right">
             <NavButtons showCreate={this.showCreate} />

@@ -98,7 +98,7 @@ class CreatePollForm extends Component {
             type="text"
             name="question"
             id="question"
-            placeholder="What would you like to know?"
+            placeholder="Ask a question!"
           />
         </FormGroup>
 

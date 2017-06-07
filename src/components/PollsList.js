@@ -18,7 +18,7 @@ export class PollsList extends Component {
     const { loading, error, items, dispatch, className } = this.props;
 
     return (
-      <div className={classNames('polls-list', className)}>
+      <div className={classNames('polls-list mb-4', className)}>
         <ListGroup>
           {items.map(poll => (
             <PollsListItem

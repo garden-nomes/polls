@@ -14,8 +14,8 @@ const UserDropdown = ({ me }) => (
     </DropdownToggle>
 
     <DropdownMenu right>
-      <DropdownItem><FontAwesome name="bar-chart" /> My polls</DropdownItem>
-      <DropdownItem><FontAwesome name="sign-out" /> Sign out</DropdownItem>
+      <DropdownItem disabled><FontAwesome name="bar-chart" /> My polls</DropdownItem>
+      <DropdownItem disabled><FontAwesome name="sign-out" /> Sign out</DropdownItem>
     </DropdownMenu>
   </UncontrolledButtonDropdown>
 );
