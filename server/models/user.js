@@ -1,5 +1,5 @@
 const mongoose = require('mongoose'),
-      bcrypt = require('bcrypt-nodejs');
+      timestamps = require('../mongoose/timestamps');
 
 const UserSchema = new mongoose.Schema({
   name: {
@@ -16,4 +16,5 @@ const UserSchema = new mongoose.Schema({
   }
 });
 
+UserSchema.plugin(timestamps);
 module.exports = mongoose.model('User', UserSchema);

@@ -1,4 +1,5 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose'),
+      timestamps = require('../mongoose/timestamps');
 
 const PollSchema = new mongoose.Schema({
   _user: {
@@ -22,4 +23,5 @@ const PollSchema = new mongoose.Schema({
   }]
 });
 
+PollSchema.plugin(timestamps);
 module.exports = mongoose.model('Poll', PollSchema);
