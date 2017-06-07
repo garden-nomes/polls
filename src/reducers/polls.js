@@ -16,7 +16,11 @@ const initialState = {
   loading: false,
   error: null,
   lastUpdated: null,
-  newItem: null,
+  newItem: {
+    loading: false,
+    error: null,
+    lastUpdated: null
+  },
   items: []
 };
 
@@ -79,11 +83,14 @@ const polls = (state = initialState, action) => {
       return {
         ...state,
         newItem: {
-          ...action.poll,
           loading: false,
           error: null,
           lastUpdated: moment().unix()
-        }
+        },
+        items: [
+          action.poll,
+          ...state.items
+        ]
       };
     case CREATE_POLL_ERROR:
       return {

@@ -9,13 +9,6 @@ const StatusIcon = ({ loading, error, lastUpdated, className }) => {
     return <FontAwesome className={className} name="spinner" spin />;
   } else if (error) {
     return <Error className={className} message={error.message} />;
-  } else if (lastUpdated) {
-    return (
-      <FontAwesome
-        name="check"
-        className={classNames('text-success', className)}
-      />
-    );
   } else {
     return null;
   }

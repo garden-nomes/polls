@@ -17,22 +17,33 @@ import {
   InputGroupButton
 } from 'reactstrap';
 import FontAwesome from 'react-fontawesome';
+import StatusIcon from './StatusIcon';
 import { createPoll } from '../actions';
 
 class CreatePollForm extends Component {
+  static initialState = {
+    question: '',
+    addOption: '',
+    options: [],
+    isOpen: false,
+    isPosting: false
+  };
+
   constructor(props) {
     super(props);
-    this.state = {
-      question: '',
-      addOption: '',
-      options: [],
-      isOpen: false
-    };
-
+    this.state = this.constructor.initialState;
     this.handleChange = this.handleChange.bind(this);
     this.onAddOption = this.onAddOption.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.onKeyPress = this.onKeyPress.bind(this);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { posting } = this.state;
+
+    if (posting && nextProps.lastUpdated) {
+      this.setState(this.constructor.initialState);
+    }
   }
 
   handleChange(event) {
@@ -66,10 +77,12 @@ class CreatePollForm extends Component {
 
     event.preventDefault();
     dispatch(createPoll({ question, options }));
+    this.setState({ posting: true });
   }
 
   render() {
-    const { isOpen, question, addOption, options } = this.state;
+    const { loading, error, lastUpdated } = this.props;
+    const { isOpen, question, addOption, options, posting } = this.state;
 
     return (
       <Form onSubmit={this.onSubmit} onKeyPress={this.onKeyPress} className="mb-2">
@@ -109,10 +122,7 @@ class CreatePollForm extends Component {
               />
 
               <InputGroupButton>
-                <Button
-                  onClick={this.onAddOption}
-                  color="secondary"
-                >
+                <Button onClick={this.onAddOption} color="secondary">
                   <FontAwesome name="plus" />
                 </Button>
               </InputGroupButton>
@@ -122,10 +132,22 @@ class CreatePollForm extends Component {
           <Button className="ml-2" size="sm" color="primary">
             Create Poll <FontAwesome name="arrow-right" />
           </Button>
+
+          <StatusIcon
+            className="ml-2"
+            loading={loading}
+            error={error}
+            lastUpdated={lastUpdated}
+          />
         </Collapse>
       </Form>
     );
   }
 }
 
-export default connect()(CreatePollForm);
+const mapStateToProps = ({ polls }) => {
+  const { loading, error, lastUpdated } = polls.newItem;
+  return { loading, error, lastUpdated };
+};
+
+export default connect(mapStateToProps)(CreatePollForm);
