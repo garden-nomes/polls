@@ -50,7 +50,7 @@ export const CREATE_POLL = 'CREATE_POLL';
 export const CREATE_POLL_SUCCESS = 'CREATE_POLL_SUCCESS';
 export const CREATE_POLL_ERROR = 'CREATE_POLL_ERROR';
 
-export const createPoll = (attributes) => dispatch => {
+export const createPoll = attributes => dispatch => {
   dispatch({ type: CREATE_POLL });
 
   axios.post('/api/polls', attributes, configureAxios())

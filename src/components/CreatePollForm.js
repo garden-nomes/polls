@@ -90,15 +90,14 @@ class CreatePollForm extends Component {
           <Label for="question" hidden>Question</Label>
 
           <Input
-            autofocus
-            size="lg"
             autoComplete="off"
-            value={question}
-            onChange={this.handleChange}
+            size="lg"
             type="text"
             name="question"
             id="question"
             placeholder="Ask a question!"
+            value={question}
+            onChange={this.handleChange}
           />
         </FormGroup>
 
