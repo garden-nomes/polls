@@ -64,7 +64,7 @@ class CreatePollForm extends Component {
   }
 
   onKeyPress(event) {
-    if (event.which === 13) {
+    if (event.which === 13 && !event.shiftKey) {
       if (document.activeElement === this.addOptionInput) {
         this.onAddOption(event);
       }
@@ -91,6 +91,8 @@ class CreatePollForm extends Component {
 
           <Input
             autofocus
+            size="lg"
+            autoComplete="off"
             value={question}
             onChange={this.handleChange}
             type="text"
@@ -102,7 +104,7 @@ class CreatePollForm extends Component {
 
         <Collapse isOpen={isOpen}>
           {options.map((option, index) => (
-            <div className="d-inline-block mr-2" key={index}>
+            <div className="d-inline-block mr-3" key={index}>
               <u>{option}</u>
             </div>
           ))}
@@ -110,7 +112,7 @@ class CreatePollForm extends Component {
           <FormGroup className="d-inline-block">
             <Label for="addOption" hidden>Add option</Label>
 
-            <InputGroup className="d-inline-flex" size="sm" style={{ width: '20rem' }}>
+            <InputGroup className="d-inline-flex" style={{ width: '20rem' }}>
               <Input
                 value={addOption}
                 onChange={this.handleChange}
@@ -129,9 +131,15 @@ class CreatePollForm extends Component {
             </InputGroup>
           </FormGroup>
 
-          <Button className="ml-2" size="sm" color="primary">
-            Create Poll <FontAwesome name="arrow-right" />
-          </Button>
+          {loading ?
+            <Button className="ml-2" color="primary" disabled>
+              Creating...
+            </Button>
+          :
+            <Button className="ml-2" color="primary">
+              Create Poll <FontAwesome name="arrow-right" />
+            </Button>
+          }
 
           <StatusIcon
             className="ml-2"
