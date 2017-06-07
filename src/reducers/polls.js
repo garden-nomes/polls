@@ -6,13 +6,17 @@ import {
   GET_POLLS_ERROR,
   VOTE_POLL,
   VOTE_POLL_SUCCESS,
-  VOTE_POLL_ERROR
+  VOTE_POLL_ERROR,
+  CREATE_POLL,
+  CREATE_POLL_SUCCESS,
+  CREATE_POLL_ERROR
 } from '../actions';
 
 const initialState = {
   loading: false,
   error: null,
   lastUpdated: null,
+  newItem: null,
   items: []
 };
 
@@ -62,6 +66,33 @@ const polls = (state = initialState, action) => {
             { ...poll, loading: false, error: action.error } :
             poll
         ))
+      };
+    case CREATE_POLL:
+      return {
+        ...state,
+        newItem: {
+          ...state.newItem,
+          loading: true
+        }
+      };
+    case CREATE_POLL_SUCCESS:
+      return {
+        ...state,
+        newItem: {
+          ...action.poll,
+          loading: false,
+          error: null,
+          lastUpdated: moment().unix()
+        }
+      };
+    case CREATE_POLL_ERROR:
+      return {
+        ...state,
+        newItem: {
+          ...state.newItem,
+          loading: false,
+          error: action.error
+        }
       };
     default:
       return state;

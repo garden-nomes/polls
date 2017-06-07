@@ -17,7 +17,9 @@ polls.post('/', authenticate, (req, res, next) => {
 
   poll._user = req.user._id;
   poll.question = req.body.question;
-  poll.options = req.body.options.map(option => ({ name: option.name }));
+  poll.options = req.body.options.map(option => ({ name: option }));
+
+  console.log(poll);
 
   poll.save(err => {
     if (err) return next(err);

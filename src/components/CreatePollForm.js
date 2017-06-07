@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import { connect } from 'react-redux';
 import {
   Row,
   Col,
@@ -16,6 +17,7 @@ import {
   InputGroupButton
 } from 'reactstrap';
 import FontAwesome from 'react-fontawesome';
+import { createPoll } from '../actions';
 
 class CreatePollForm extends Component {
   constructor(props) {
@@ -29,6 +31,7 @@ class CreatePollForm extends Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.onAddOption = this.onAddOption.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
     this.onKeyPress = this.onKeyPress.bind(this);
   }
 
@@ -57,11 +60,19 @@ class CreatePollForm extends Component {
     }
   }
 
+  onSubmit(event) {
+    const { dispatch } = this.props;
+    const { question, options } = this.state;
+
+    event.preventDefault();
+    dispatch(createPoll({ question, options }));
+  }
+
   render() {
     const { isOpen, question, addOption, options } = this.state;
 
     return (
-      <Form onKeyPress={this.onKeyPress} className="mb-2">
+      <Form onSubmit={this.onSubmit} onKeyPress={this.onKeyPress} className="mb-2">
         <FormGroup>
           <Label for="question" hidden>Question</Label>
 
@@ -78,7 +89,9 @@ class CreatePollForm extends Component {
 
         <Collapse isOpen={isOpen}>
           {options.map((option, index) => (
-            <Input size="sm" className="d-inline-block mr-2" key={index} static>{option}</Input>
+            <div className="d-inline-block mr-2" key={index}>
+              <u>{option}</u>
+            </div>
           ))}
 
           <FormGroup className="d-inline-block">
@@ -115,4 +128,4 @@ class CreatePollForm extends Component {
   }
 }
 
-export default CreatePollForm;
+export default connect()(CreatePollForm);
