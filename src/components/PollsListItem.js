@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Badge, ListGroupItem } from 'reactstrap';
 import classNames from 'classnames';
+import moment from 'moment';
 import VoteDropdown from './VoteDropdown';
 import StatusIcon from './StatusIcon';
 
@@ -20,7 +21,7 @@ class PollsListItem extends Component {
           'justify-content-between'
         )}
       >
-        <span className="no-wrap mr-2">
+        <span className="no-wrap mr-auto">
           <b>{poll.question}</b>
           {poll.options.sort((a, b) => a.votes < b.votes).map(option => (
             <span key={option._id} className="polls-list-item-option mx-1">
@@ -29,8 +30,12 @@ class PollsListItem extends Component {
           ))}
         </span>
 
+        <span className="small no-wrap text-muted mx-2">
+          Created {moment(poll.createdAt).fromNow()}
+        </span>
+
         <StatusIcon
-          className="mr-2 ml-auto"
+          className="mr-2"
           loading={poll.loading}
           error={poll.error}
           lastUpdated={poll.lastUpdated}
