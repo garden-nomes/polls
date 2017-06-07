@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import moment from 'moment';
 import VoteDropdown from './VoteDropdown';
 import StatusIcon from './StatusIcon';
+import CreatedAt from './CreatedAt';
 
 class PollsListItem extends Component {
   render() {
@@ -30,9 +31,10 @@ class PollsListItem extends Component {
           ))}
         </span>
 
-        <span className="small no-wrap text-muted mx-2">
-          Created {moment(poll.createdAt).fromNow()}
-        </span>
+        <CreatedAt
+          className="small no-wrap text-muted mx-2"
+          createdAt={poll.createdAt}
+        />
 
         <StatusIcon
           className="mr-2"
