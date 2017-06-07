@@ -6,7 +6,7 @@ const express = require('express'),
 const polls = express.Router();
 
 polls.get('/', (req, res, next) => {
-  Poll.find().populate('_user', 'email').exec((err, polls) => {
+  Poll.find().sort('-createdAt').populate('_user', 'name').exec((err, polls) => {
     if (err) return next(err);
     res.send(polls);
   });
