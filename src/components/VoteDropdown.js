@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {
+  Button,
   UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
@@ -8,19 +9,21 @@ import {
 
 class VoteDropdown extends Component {
   render() {
-    const { poll, onClick } = this.props;
+    const { poll, onClick, loading } = this.props;
 
     return (
-      <UncontrolledDropdown size="sm" tag="span">
-        <DropdownToggle caret>Vote</DropdownToggle>
-        <DropdownMenu right>
-          {poll.options.map(option => (
-            <DropdownItem key={option._id} onClick={() => onClick(option._id)}>
-              {option.name}
-            </DropdownItem>
-          ))}
-        </DropdownMenu>
-      </UncontrolledDropdown>
+      loading ?
+        <Button color="secondary" size="sm" disabled>Voting...</Button> :
+        <UncontrolledDropdown size="sm" tag="span">
+          <DropdownToggle caret>Vote</DropdownToggle>
+          <DropdownMenu right>
+            {poll.options.map(option => (
+              <DropdownItem key={option._id} onClick={() => onClick(option._id)}>
+                {option.name}
+              </DropdownItem>
+            ))}
+          </DropdownMenu>
+        </UncontrolledDropdown>
     );
   }
 }

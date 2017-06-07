@@ -36,7 +36,7 @@ class PollsListItem extends Component {
           lastUpdated={poll.lastUpdated}
         />
 
-        <VoteDropdown poll={poll} onClick={vote} />
+        <VoteDropdown poll={poll} loading={poll.loading} onClick={vote} />
       </ListGroupItem>
     );
   }
