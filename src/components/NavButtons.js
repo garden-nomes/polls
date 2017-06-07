@@ -11,7 +11,6 @@ class NavButtons extends Component {
     if (me && !me.loading && !me.error) {
       return (
         <div className="nav-buttons">
-          <NewPollButton onClick={showCreate} className="mr-2" />
           <UserDropdown me={me} />
         </div>
       );

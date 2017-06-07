@@ -8,7 +8,7 @@ import CreatePollForm from './CreatePollForm';
 class Home extends Component {
   constructor(props) {
     super(props);
-    this.state = { isCreateFormOpen: false };
+    this.state = { isCreateFormOpen: true };
     this.showCreate = this.showCreate.bind(this);
     this.hideCreate = this.hideCreate.bind(this);
   }

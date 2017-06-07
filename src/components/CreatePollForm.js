@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import {
   Row,
   Col,
+  Collapse,
   Button,
   Card,
   CardTitle,
@@ -15,60 +17,102 @@ import {
 } from 'reactstrap';
 import FontAwesome from 'react-fontawesome';
 
-const CreatePollForm = ({ hideCreate }) => (
-  <Card className="mb-4">
-    <CardBlock>
-      <Form>
-        <div className="d-flex justify-content-between mb-2">
-          <CardTitle>Create poll</CardTitle>
+class CreatePollForm extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      question: '',
+      addOption: '',
+      options: [],
+      isOpen: false
+    };
 
-          <div className="text-right">
-            <Button size="sm" className="mr-2" color="secondary" onClick={hideCreate}>
-              <FontAwesome name="chevron-up" /> Close
-            </Button>
+    this.handleChange = this.handleChange.bind(this);
+    this.onAddOption = this.onAddOption.bind(this);
+    this.onKeyPress = this.onKeyPress.bind(this);
+  }
 
-            <Button size="sm" color="primary">
-              Create <FontAwesome name="arrow-right" />
-            </Button>
-          </div>
-        </div>
+  handleChange(event) {
+    const { name, value } = event.target;
+    this.setState({ [name]: value, isOpen: true });
+  }
 
+  onAddOption(event) {
+    const { options, addOption } = this.state;
+
+    this.setState({
+      options: [...options, addOption],
+      addOption: ''
+    });
+
+    event.preventDefault();
+    this.addOptionInput.focus();
+  }
+
+  onKeyPress(event) {
+    if (event.which === 13) {
+      if (document.activeElement === this.addOptionInput) {
+        this.onAddOption(event);
+      }
+    }
+  }
+
+  render() {
+    const { isOpen, question, addOption, options } = this.state;
+
+    return (
+      <Form onKeyPress={this.onKeyPress} className="mb-2">
         <FormGroup>
           <Label for="question" hidden>Question</Label>
 
           <Input
+            autofocus
+            value={question}
+            onChange={this.handleChange}
             type="text"
             name="question"
             id="question"
             placeholder="What would you like to know?"
           />
         </FormGroup>
-        <Row>
-          <Col sm="6">
-            <FormGroup>
-              <Label for="addOption" hidden>Add response</Label>
 
-              <InputGroup size="sm" style={{ width: '300px' }}>
-                <Input
-                  type="text"
-                  name="addOption"
-                  id="addOption"
-                  placeholder="Add response"
-                />
+        <Collapse isOpen={isOpen}>
+          {options.map((option, index) => (
+            <Input size="sm" className="d-inline-block mr-2" key={index} static>{option}</Input>
+          ))}
 
-                <InputGroupButton>
-                  <Button color="primary"><FontAwesome name="plus" /></Button>
-                </InputGroupButton>
-              </InputGroup>
-            </FormGroup>
-          </Col>
+          <FormGroup className="d-inline-block">
+            <Label for="addOption" hidden>Add option</Label>
 
-          <Col sm="6">
-          </Col>
-        </Row>
+            <InputGroup className="d-inline-flex" size="sm" style={{ width: '20rem' }}>
+              <Input
+                value={addOption}
+                onChange={this.handleChange}
+                type="text"
+                getRef={input => this.addOptionInput = input}
+                name="addOption"
+                id="addOption"
+                placeholder="Add response"
+              />
+
+              <InputGroupButton>
+                <Button
+                  onClick={this.onAddOption}
+                  color="secondary"
+                >
+                  <FontAwesome name="plus" />
+                </Button>
+              </InputGroupButton>
+            </InputGroup>
+          </FormGroup>
+
+          <Button className="ml-2" size="sm" color="primary">
+            Create Poll <FontAwesome name="arrow-right" />
+          </Button>
+        </Collapse>
       </Form>
-    </CardBlock>
-  </Card>
-);
+    );
+  }
+}
 
 export default CreatePollForm;
