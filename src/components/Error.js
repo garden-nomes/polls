@@ -24,10 +24,10 @@ class Error extends Component {
 
   render() {
     const { tooltipOpen } = this.state;
-    const { message } = this.props;
+    const { message, className } = this.props;
 
     return (
-      <span className="error">
+      <span className={classNames('error', className)}>
         <FontAwesome
           id={this.id}
           name="exclamation-circle"
